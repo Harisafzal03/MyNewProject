@@ -10,6 +10,7 @@ import Details from "./App/screens/Details";
 import Giver from "./App/screens/Giver";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { FIREBASE_AUTH } from "./Firebaseconfig";
+import Newscreen from "./App/screens/Newscreen";
 
 const Stack=createNativeStackNavigator();
 const InsideStack=createNativeStackNavigator();
@@ -17,8 +18,9 @@ const InsideStack=createNativeStackNavigator();
 function InsideLayout() {
     return (
         <InsideStack.Navigator>
-            <InsideStack.Screen name="Mytodos" component={List}/>
+            <InsideStack.Screen name="SelectPayment" component={List}/>
             <InsideStack.Screen name="Details" component={Details}/>
+            
         </InsideStack.Navigator>
     );
 }
@@ -44,6 +46,7 @@ export default function App(){
                 }
                 
         <Stack.Screen name="Signup" component={Signup} options={{headerShown: false}} />
+        <Stack.Screen name="Send Payments" component={Newscreen} options={{headerShown: true}} />
         <Stack.Screen name="Giver" component={Giver} options={{headerShown: false}} />
             </Stack.Navigator>
         </NavigationContainer>
