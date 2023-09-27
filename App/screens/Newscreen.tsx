@@ -12,6 +12,8 @@ import axios from "axios";
 import List from "./List";
 import * as SecureStore from "expo-secure-store";
 import { NavigationProp } from "@react-navigation/native";
+import { StripeProvider } from "@stripe/stripe-react-native";
+import StripeApp from "../../src/StripeApp";
 interface RouterProps {
   navigation: NavigationProp<any, any>;
 }
@@ -100,11 +102,14 @@ const Newscreen = ({ navigation, route }) => {
       </View>
       <TouchableOpacity
         onPress={() => {
+            
           handleSave();
+          <StripeApp/>
           navigation.navigate("SelectPayment", {
             navigation,
             transactions: serializedTransactions,
           });
+          navigation.navigate("Stripe");
         }}
         style={styles.button}
       >

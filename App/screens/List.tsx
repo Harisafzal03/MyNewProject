@@ -14,6 +14,7 @@ import Details from "./Details";
 import { SafeAreaView } from "react-native-safe-area-context";
 import axios from "axios";
 
+
 interface RouterProps {
   navigation: NavigationProp<any, any>;
 }
@@ -22,8 +23,7 @@ const List = ({ navigation, route }) => {
   const [characterImages, setCharacterImages] = useState([]);
 
   const serializedTransactions = route.params?.transactions;
-  const transactions = serializedTransactions;
-  console.log(transactions, "trr");
+  const transactions = JSON.parse(serializedTransactions || "[]");
 
   useEffect(() => {
     (async () => {
@@ -50,6 +50,8 @@ const List = ({ navigation, route }) => {
         padding: 16,
       }}
     >
+      
+      
       <View style={{ alignItems: "center" }}>
         <ImageBackground
           source={require("../../assets/yz.jpg")}
@@ -61,9 +63,8 @@ const List = ({ navigation, route }) => {
         <Button onPress={() => FIREBASE_AUTH.signOut()} title="Logout" />
       </View>
       <View style={{ marginTop: 10 }}>
-        <Text style={{ fontSize: 20, fontWeight: "500" }}>
-          Recent Transactions
-        </Text>
+        <Text style={{ fontSize: 20, fontWeight: "500" }}>Recent Transactions</Text>
+
         <FlatList
           data={transactions}
           keyExtractor={(item, index) => index.toString()}

@@ -11,6 +11,8 @@ import Giver from "./App/screens/Giver";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { FIREBASE_AUTH } from "./Firebaseconfig";
 import Newscreen from "./App/screens/Newscreen";
+import StripeApp from "./src/StripeApp";
+import { StripeProvider } from "@stripe/stripe-react-native";
 
 const Stack=createNativeStackNavigator();
 const InsideStack=createNativeStackNavigator();
@@ -35,21 +37,22 @@ export default function App(){
         },[]);
     return (
         <NavigationContainer>
-            <Stack.Navigator  initialRouteName="Login">
+            <Stack.Navigator initialRouteName="Login">
                 {user ? (
-                <Stack.Screen name="Inside" component={InsideLayout} options={{headerShown: false}}/>
+                    <Stack.Screen name="Inside" component={InsideLayout} options={{ headerShown: false }} />
 
-                ):(
-                <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+                ) : (
+                    <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 
-                )
-                }
-                
-        <Stack.Screen name="Signup" component={Signup} options={{headerShown: false}} />
-        <Stack.Screen name="Send Payments" component={Newscreen} options={{headerShown: true}} />
-        <Stack.Screen name="Giver" component={Giver} options={{headerShown: false}} />
+                )}
+
+                <Stack.Screen name="Signup" component={Signup} options={{ headerShown: false }} />
+                <Stack.Screen name="Send Payments" component={Newscreen} options={{ headerShown: true }} />
+                <Stack.Screen name="Giver" component={Giver} options={{ headerShown: false }} />
+                <Stack.Screen name="Stripe" component={StripeApp} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
+        
         
 
     );
